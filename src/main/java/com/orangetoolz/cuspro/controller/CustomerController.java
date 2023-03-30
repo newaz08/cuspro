@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
+
+import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -27,9 +32,16 @@ public class CustomerController {
 
         try {
             customerService.processFile(file);
+
+            File tempFile = (File) ((StandardMultipartHttpServletRequest) ((ServletRequestAttributes)
+                                        RequestContextHolder.currentRequestAttributes())
+                                                .getRequest()).getFile(file.getOriginalFilename());
+            tempFile.delete();
             return new ResponseEntity<>("Successfully File Uploaded", HttpStatus.OK);
         } catch (IOException exception) {
             return new ResponseEntity<>("Exception occurred", HttpStatus.BAD_REQUEST);
+        } finally {
+
         }
     }
 }
