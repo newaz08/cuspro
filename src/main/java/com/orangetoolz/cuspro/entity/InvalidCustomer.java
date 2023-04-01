@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
+/**
+ * @author Newaz Sharif
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

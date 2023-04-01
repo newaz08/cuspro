@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Newaz Sharif
+ */
+
 @Repository
 public interface InvalidCustomerRepository extends JpaRepository<InvalidCustomer, Long> {
 

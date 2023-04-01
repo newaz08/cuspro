@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Newaz Sharif
+ */
+
 public class CustomerSet <E extends Customer> extends HashSet<E> {
 
     @Override

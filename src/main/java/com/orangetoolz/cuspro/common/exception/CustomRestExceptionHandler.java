@@ -9,6 +9,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Newaz Sharif
+ */
+
 @RestControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 

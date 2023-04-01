@@ -5,11 +5,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import java.util.concurrent.CopyOnWriteArrayList;
+
+import java.util.List;
+
+/**
+ * @author Newaz Sharif
+ */
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
 
     @Query("SELECT c FROM Customer c")
-    CopyOnWriteArrayList<Customer> findBetween(Pageable pageable);
+    List<Customer> findBetween(Pageable pageable);
 }

@@ -1,5 +1,9 @@
 package com.orangetoolz.cuspro.common;
 
+/**
+ * @author Newaz Sharif
+ */
+
 public class ApplicationConstant {
 
     private ApplicationConstant() {

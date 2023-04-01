@@ -24,10 +24,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+/**
+ * @author Newaz Sharif
+ */
 
 @Service
 public class CustomerServiceImplementation implements FileImportService, FileExportService {
@@ -155,10 +158,10 @@ public class CustomerServiceImplementation implements FileImportService, FileExp
         int startChunk = 0;
         int endChunk = ApplicationConstant.EXPORT_DATA_CHUNK_SIZE;
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        long startTime = System.currentTimeMillis();
+
         while (true) {
             Pageable pageable = PageRequest.of(startChunk, ApplicationConstant.EXPORT_DATA_CHUNK_SIZE);
-            CopyOnWriteArrayList<Customer> customers = customerRepository.findBetween(pageable);
+            List<Customer> customers = customerRepository.findBetween(pageable);
             if(customers.isEmpty()) {
                 break;
             }
@@ -180,8 +183,6 @@ public class CustomerServiceImplementation implements FileImportService, FileExp
             Thread.currentThread().interrupt();
             e.printStackTrace();
         }
-        long endTime = System.currentTimeMillis();
-        System.out.println("Export valid customer process execution time= "+(endTime - startTime)+" ms");
     }
 
     @Override
@@ -189,7 +190,7 @@ public class CustomerServiceImplementation implements FileImportService, FileExp
 
         List<InvalidCustomer> invalidCustomers = invalidCustomerRepository.findAllInvalidCustomer();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        long startTime = System.currentTimeMillis();
+
         executorService.execute(() -> {
             try {
                 exportInvalidCustomerDataIntoOutputStream(invalidCustomers, response);
@@ -205,12 +206,11 @@ public class CustomerServiceImplementation implements FileImportService, FileExp
             Thread.currentThread().interrupt();
             e.printStackTrace();
         }
-        long endTime = System.currentTimeMillis();
-        System.out.println("Export invalid customer process execution time= "+(endTime - startTime)+" ms");
+
     }
 
     private void exportCustomerDataIntoOutputStream(
-            CopyOnWriteArrayList<Customer> customers,HttpServletResponse response) throws IOException{
+            List<Customer> customers, HttpServletResponse response) throws IOException{
 
         String fileName ="customers_"+fileNumber+".csv";
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName="+fileName);

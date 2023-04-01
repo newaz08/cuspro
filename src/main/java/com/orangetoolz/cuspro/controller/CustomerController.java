@@ -12,6 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Newaz Sharif
+ */
+
 @RestController
 @RequestMapping("/api/customer")
 @Api(tags = "Customers")
@@ -44,7 +48,7 @@ public class CustomerController {
     @ApiOperation(value = "Export valid customer based on email and phone validation")
     @ApiResponse(code = 200, message = "", response = Customer.class)
     @PostMapping("/valid-data-export")
-    public void customerDataExport(HttpServletResponse response) throws IOException,InterruptedException  {
+    public void customerDataExport(HttpServletResponse response) {
 
         customerService.exportValidCustomer(response);
     }

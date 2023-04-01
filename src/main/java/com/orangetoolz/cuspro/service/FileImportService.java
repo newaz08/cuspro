@@ -6,6 +6,10 @@ import com.orangetoolz.cuspro.entity.InvalidCustomer;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Newaz Sharif
+ */
+
 public interface FileImportService {
 
     void importValidCustomer(Set<Customer> validCustomers);

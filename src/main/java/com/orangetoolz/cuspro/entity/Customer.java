@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import java.util.Objects;
+
+/**
+ * @author Newaz Sharif
+ */
 
 @Data
 @AllArgsConstructor
@@ -25,10 +27,9 @@ public class Customer {
     private String state;
     private String zipCode;
     @Column(unique = true)
-    //@Pattern(regexp = "^(\\+?1[\\s.-])?\\(?[0-9]{3}\\)?[\\s.-]?[0-9]{3}[\\s.-]?[0-9]{4}$")
+
     private String phone;
     @Column(unique = true)
-    //@Email(message = "Invalid Email Address")
     @NotEmpty(message = "Email can't be empty")
     private String email;
     private String ipAddress;
