@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -29,4 +30,16 @@ public class InvalidCustomer {
     private String email;
     private String ipAddress;
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || this.getClass() != obj.getClass()) return false;
+        InvalidCustomer invalidCustomer = (InvalidCustomer) obj;
+        return Objects.equals(phone, invalidCustomer.phone) && Objects.equals(email, invalidCustomer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phone,email);
+    }
 }

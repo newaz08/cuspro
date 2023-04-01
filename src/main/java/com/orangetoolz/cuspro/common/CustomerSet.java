@@ -8,13 +8,10 @@ import java.util.regex.Pattern;
 
 public class CustomerSet <E extends Customer> extends HashSet<E> {
 
-    public static final String EMAIL_REGEX = "^[^\\s@]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    public static final String US_PHONE_REGEX = "^\\(?\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{4}$";
-
     @Override
     public boolean add(E e) {
-        if(!isValidProperty(e.getEmail(),EMAIL_REGEX)
-                || !isValidProperty(e.getPhone(),US_PHONE_REGEX)) {
+        if(!isValidProperty(e.getEmail(), ApplicationConstant.EMAIL_REGEX)
+                || !isValidProperty(e.getPhone(), ApplicationConstant.US_PHONE_REGEX)) {
             return false;
         }
         return super.add(e);
